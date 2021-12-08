@@ -96,7 +96,7 @@ public class ModelCraps {
             case 3: estadoToString="Estableciste punto en "+punto+" continua lanzando"+"\n debes" +
                     " volver a sacar este valor antes que un 7 o pierdes";
                 break;
-            case 4: estadoToString="Sacaste"+punto+"otra vez, Ganaste!!";
+            case 4: estadoToString="Sacaste "+punto+" otra vez, Ganaste!!";
                 break;
             case 5: estadoToString="Sacaste 7, perdiste :(";
                 break;
