@@ -13,7 +13,7 @@ package juegoCraps;
 public class ModelCraps {
     private Dado dado1, dado2;
     private int tiro, punto, estado, flag;
-    private String estadoToString;
+    private String[] estadoToString;
     private int[] caras; //objeto de tipo vector
 
     /**
@@ -23,6 +23,7 @@ public class ModelCraps {
         dado1 = new Dado();
         dado2 = new Dado();
         caras = new int[2]; //indicar tamaño de vector
+        estadoToString = new String[2];
         flag = 0;
     }
 
@@ -69,10 +70,16 @@ public class ModelCraps {
             estado=4;
             flag=0;
         }
-        if(tiro==7){
-            estado=5;
-            flag=0;
+        else{
+            if(tiro==7){
+                estado=5;
+                flag=0;
+            }
+            else{
+                estado = 6;
+            }
         }
+
     }
 
     public int getTiro() {
@@ -87,19 +94,31 @@ public class ModelCraps {
      * Establish message game state according to estado attribute value
      * @return
      */
-    public String getEstadoToString() {
+    public String[] getEstadoToString() {
         switch (estado){
-            case 1: estadoToString="Sacaste natural, Ganaste!!";
-                break;
-            case 2: estadoToString="Sacaste Craps, Perdiste!!";
-                break;
-            case 3: estadoToString="Estableciste punto en "+punto+" continua lanzando"+"\n debes" +
+            case 1: estadoToString[0] = "Tiro de Salida = "+tiro;
+                    estadoToString[1]="Sacaste natural, Ganaste!!";
+                    break;
+            case 2: estadoToString[0] = "Tiro de Salida = "+tiro;
+                    estadoToString[1]="Sacaste Craps, Perdiste!!";
+                    break;
+            case 3: estadoToString[0] = "Tiro de Salida = "+tiro+"\n Punto = "+punto;
+                    estadoToString[1]="Estableciste punto en "+punto+" continua lanzando"+"\ndebes" +
                     " volver a sacar este valor antes que un 7 o pierdes";
-                break;
-            case 4: estadoToString="Sacaste "+punto+" otra vez, Ganaste!!";
-                break;
-            case 5: estadoToString="Sacaste 7, perdiste :(";
-                break;
+                    break;
+            case 4: estadoToString[0] = "Tiro de Salida = "+punto+"\n Punto = "+punto+
+                    "\n Valor del nuevo tiro es: "+tiro;
+                    estadoToString[1]="Sacaste "+punto+" otra vez, Ganaste!!";
+                    break;
+            case 5: estadoToString[0] = "Tiro de Salida = "+punto+"\n Punto = "+punto+
+                    "\n Valor del nuevo tiro es: "+tiro;
+                    estadoToString[1]="Sacaste 7, perdiste :(";
+                    break;
+            case 6: estadoToString[0] = "Tiro de Salida = "+punto+"\n Punto = "+punto+
+                    "\n Valor del nuevo tiro es: "+tiro;
+                    estadoToString[1]="Tienes un punto en "+punto+", continua lanzando"+"\ndebes" +
+                        " volver a sacar este valor antes que un 7 o pierdes";
+                    break;
 
         }
         return estadoToString;
